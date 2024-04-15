@@ -14,4 +14,21 @@ import { employeesListDummyData } from '../../../../shared/dummyData/employees';
 export class EmployeesListComponent {
   searchKeyword: string = ''
   employeesList: EmployeesI[] = employeesListDummyData
+
+  ngOnInit() {
+    this.resolveEmployeesStorage()
+  }
+
+  resolveEmployeesStorage() {
+    // get storaged employeesList
+    const employeesListStorage = localStorage.getItem('employeesList')
+    // resolve employeesListStorage
+    if (!employeesListStorage) {
+      // save dummyData in localStorage
+      localStorage.setItem('employeesList', JSON.stringify(this.employeesList))
+    } else {
+      // save employeesListStorage
+      this.employeesList = JSON.parse(employeesListStorage)
+    }
+  }
 }
