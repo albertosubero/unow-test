@@ -1,1 +1,46 @@
-<p>employees-list works!</p>
+<section>
+  <div class="container"> 
+    <!-- create employee button -->
+    <h2 class="md-3">
+      Empleados
+      <button type="button" class="btn btn-primary mx-3">Crear +</button>
+    </h2>
+    <!-- create employee button end's -->
+    <!-- search employees by keyword input -->
+    <div class="form-group search-input-wrapper">
+      <label for="search-text">Buscar empleado(s)</label>
+      <input 
+        type="text" 
+        class="form-control" 
+        id="search-input" 
+        aria-describedby="search-employees" 
+        [(ngModel)]="searchKeyword" 
+        placeholder="Introduzca datos del empleado" 
+        autofocus
+      >
+    </div>
+    <!-- search employees by keyword input end's -->
+    <!-- employees list table -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Fecha de nacimiento</th>
+          <th scope="col">Puesto de trabajo</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (employee of employeesList | searchFilter: searchKeyword; track $index) {
+          <tr>
+            <td>{{ employee.name + ' ' + employee.lastName }}</td>
+            <td>{{ employee.dateOfbirth }}</td>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.email }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+    <!-- employees list table end's -->
+  </div>
+</section>
