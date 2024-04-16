@@ -1,4 +1,4 @@
-export interface EmployeesI {
+export interface IEmployees {
   _id: string,
   role: 'ADMIN' | 'USER',
   name: string,

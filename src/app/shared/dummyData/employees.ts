@@ -1,6 +1,6 @@
-import { EmployeesI } from "../interfaces/employees.interface";
+import { IEmployees } from "../interfaces/employees.interface";
 
-export const employeesListDummyData: EmployeesI[] = [
+export const employeesListDummyData: IEmployees[] = [
   {
     _id: '1B',
     role: 'ADMIN',

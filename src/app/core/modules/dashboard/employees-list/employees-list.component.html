@@ -3,7 +3,13 @@
     <!-- create employee button -->
     <h2 class="md-3">
       Empleados
-      <button type="button" class="btn btn-primary mx-3">Crear +</button>
+      <button 
+        type="button" 
+        class="btn btn-primary mx-3"
+        (click)="openModal('ADD')"
+      >
+        Crear empleado +
+      </button>
     </h2>
     <!-- create employee button end's -->
     <!-- search employees by keyword input -->
@@ -27,7 +33,6 @@
           <th scope="col">Nombre</th>
           <th scope="col">Fecha de nacimiento</th>
           <th scope="col">Puesto de trabajo</th>
-          <th scope="col">Email</th>
         </tr>
       </thead>
       <tbody>
@@ -36,7 +41,6 @@
             <td>{{ employee.name + ' ' + employee.lastName }}</td>
             <td>{{ employee.dateOfbirth }}</td>
             <td>{{ employee.position }}</td>
-            <td>{{ employee.email }}</td>
           </tr>
         }
       </tbody>
@@ -44,3 +48,6 @@
     <!-- employees list table end's -->
   </div>
 </section>
+<!-- edit or add employees modal -->
+<app-employees-modal #employeesModalComponent />
+<!-- edit or add employees modal end's -->

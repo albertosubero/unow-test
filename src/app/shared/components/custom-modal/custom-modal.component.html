@@ -1,0 +1,29 @@
+<ng-template #modalTemplate let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{config.modalTitle}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()"></button>
+  </div>
+  <div class="modal-body">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
+  </div>
+  <div class="modal-footer" *ngIf="config.showFooter || config.showFooter === undefined">
+    <button 
+      type="button"
+      class="btn btn-outline-red d-flex align-items-center shadow rounded-pill px-3"
+      (click)="dismiss()"
+      *ngIf="config.hideDismissButton === undefined || config.hideDismissButton"
+      [disabled]="config.disableDismissButton !== undefined || config.disableDismissButton"
+    >
+      {{ config.dismissButtonLabel ?? 'Cancelar' }}
+    </button>
+    <button 
+      type="button"
+      class="btn btn-red d-flex align-items-center shadow rounded-pill px-4"
+      (click)="close()"
+      *ngIf="config.hideCloseButton === undefined || config.hideCloseButton"
+      [disabled]="config.disableCloseButton !== undefined || config.disableCloseButton"
+    >
+      {{ config.closeButtonLabel ?? 'Aceptar' }}
+    </button>
+  </div>
+</ng-template>

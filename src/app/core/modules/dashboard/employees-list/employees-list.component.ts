@@ -1,19 +1,22 @@
-import { Component } from '@angular/core';
-import { EmployeesI } from '../../../../shared/interfaces/employees.interface';
+import { Component, ViewChild } from '@angular/core';
+import { IEmployees } from '../../../../shared/interfaces/employees.interface';
 import { SearchFilterPipe } from '../../../../shared/pipes/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { employeesListDummyData } from '../../../../shared/dummyData/employees';
+import { EmployeesModalComponent } from '../employees-modal/employees-modal.component';
 
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [FormsModule, SearchFilterPipe],
+  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss'
 })
 export class EmployeesListComponent {
+  @ViewChild('employeesModalComponent', { static: false }) employeesModalComponent!: EmployeesModalComponent;
+  
   searchKeyword: string = ''
-  employeesList: EmployeesI[] = employeesListDummyData
+  employeesList: IEmployees[] = employeesListDummyData
 
   ngOnInit() {
     this.resolveEmployeesStorage()
@@ -30,5 +33,10 @@ export class EmployeesListComponent {
       // save employeesListStorage
       this.employeesList = JSON.parse(employeesListStorage)
     }
+  }
+
+  openModal(employeeModalType: 'ADD' | 'EDIT') {
+    // Open employees modal
+    this.employeesModalComponent.openModal(employeeModalType)
   }
 }
