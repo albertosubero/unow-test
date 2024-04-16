@@ -33,6 +33,7 @@
           <th scope="col">Nombre</th>
           <th scope="col">Fecha de nacimiento</th>
           <th scope="col">Puesto de trabajo</th>
+          <th scope="col">Email</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +42,7 @@
             <td>{{ employee.name + ' ' + employee.lastName }}</td>
             <td>{{ employee.dateOfbirth }}</td>
             <td>{{ employee.position }}</td>
+            <td>{{ employee.email }}</td>
           </tr>
         }
       </tbody>
@@ -49,5 +51,5 @@
   </div>
 </section>
 <!-- edit or add employees modal -->
-<app-employees-modal #employeesModalComponent />
+<app-employees-modal #employeesModalComponent (employeeDataSubmit)="employeeDataSubmit($event)" />
 <!-- edit or add employees modal end's -->

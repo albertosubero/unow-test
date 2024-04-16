@@ -2,30 +2,39 @@ import { IEmployees } from "../interfaces/employees.interface";
 
 export const employeesListDummyData: IEmployees[] = [
   {
-    _id: '1B',
+    email: 'alberto-c@a.com',
     role: 'ADMIN',
     name: 'Alberto',
     lastName: 'Subero',
-    dateOfbirth: '22/04/1991',
-    position: 'full-stack developer',
-    email: 'alberto-c@a.com'
+    dateOfbirth: {
+      day: 22,
+      month: 4,
+      year: 1991
+    },
+    position: 0,
   },
   {
-    _id: '2B',
+    email: 'pedro-c@a.com',
     role: 'USER',
     name: 'Pedro',
     lastName: 'Parra',
-    dateOfbirth: '02/12/1995',
-    position: 'help desk',
-    email: 'pedro-c@a.com'
+    dateOfbirth: {
+      day: 22,
+      month: 3,
+      year: 1987
+    },
+    position: 4,
   },
   {
-    _id: '2B',
+    email: 'maria-c@a.com',
     role: 'USER',
     name: 'Maria',
     lastName: 'Ramirez',
-    dateOfbirth: '17/02/1987',
-    position: 'help desk',
-    email: 'maria-c@a.com'
+    dateOfbirth: {
+      day: 12,
+      month: 12,
+      year: 1995
+    },
+    position: 2,
   }
 ]

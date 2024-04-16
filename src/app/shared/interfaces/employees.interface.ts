@@ -1,9 +1,12 @@
 export interface IEmployees {
-  _id: string,
+  email: string,
   role: 'ADMIN' | 'USER',
   name: string,
   lastName: string,
-  dateOfbirth: string,
-  position: string,
-  email: string
+  dateOfbirth: {
+    day: number,
+    month: number,
+    year: number,
+  },
+  position: number,
 }

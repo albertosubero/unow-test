@@ -39,4 +39,10 @@ export class EmployeesListComponent {
     // Open employees modal
     this.employeesModalComponent.openModal(employeeModalType)
   }
+
+  employeeDataSubmit(employee: IEmployees) {
+    console.log("🚀 ~ EmployeesListComponent ~ employeeDataSubmit ~ employee:", employee)
+    this.employeesList.push(employee)
+    localStorage.setItem('employeesList', JSON.stringify(this.employeesList))
+  }
 }
