@@ -16,6 +16,7 @@ import { IEmployees } from '../../../../shared/interfaces/employees.interface';
 })
 export class EmployeesModalComponent {
   @Output() employeeDataSubmit = new EventEmitter()
+  @Output() removeEmployee = new EventEmitter()
   // Get CustomModalComponent
   @ViewChild('modalComponent', { static: false }) modalComponent!: CustomModalComponent;
   // Custom modal config
@@ -41,13 +42,16 @@ export class EmployeesModalComponent {
   constructor(private positionsService: PositionsService) {}
 
   ngOnInit() {
+    // Get positions array for select input
     this.getPositions()
   }
+
   // open CustomModalComponent
   openModal(employeeModalType: 'ADD' | 'EDIT') {
     // Setup modalTitle by employeeModalType
     if (employeeModalType === 'ADD') {
       this.employeesModalConfig.modalTitle = 'Crear nuevo empleado'
+      this.employeeDataForm.reset()
     } else {
       this.employeesModalConfig.modalTitle = 'Editar empleado'
       this.patchFormData()
@@ -55,11 +59,21 @@ export class EmployeesModalComponent {
     // Open employees modal
     this.modalComponent.open({size:'lg', backdrop: 'static'})
   }
-
+  // Close CustomModalComponent
+  closeModal() {
+    this.modalComponent.close()
+  }
   // Form submit
   onSubmit() {
     const employee = this.employeeDataForm.value
     this.employeeDataSubmit.emit(employee)
+    this.closeModal()
+  }
+
+  // Remove employee from company
+  deleteEmployee() {
+    this.removeEmployee.emit(this.employeeDataForm.value.email)
+    this.closeModal()
   }
 
   // Get positions array

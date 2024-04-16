@@ -52,7 +52,10 @@
               >
                 <i class="las la-pen"></i>
               </button>
-              <button class="btn btn-danger">
+              <button 
+                class="btn btn-danger"
+                (click)="deleteEmployee(employee.email)"
+              >
                 <i class="las la-trash-alt"></i>
               </button>
             </td>
@@ -64,5 +67,9 @@
   </div>
 </section>
 <!-- edit or add employees modal -->
-<app-employees-modal #employeesModalComponent (employeeDataSubmit)="employeeDataSubmit($event)" />
+<app-employees-modal 
+  #employeesModalComponent 
+  (employeeDataSubmit)="employeeDataSubmit($event)" 
+  (removeEmployee)="deleteEmployee($event)" 
+/>
 <!-- edit or add employees modal end's -->

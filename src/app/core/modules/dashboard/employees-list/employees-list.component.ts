@@ -31,11 +31,15 @@ export class EmployeesListComponent {
     // resolve employeesListStorage
     if (!employeesListStorage) {
       // save dummyData in localStorage
-      localStorage.setItem('employeesList', JSON.stringify(this.employeesList))
+      this.saveEmployeesStorage(this.employeesList)
     } else {
       // save employeesListStorage
       this.employeesList = JSON.parse(employeesListStorage)
     }
+  }
+
+  saveEmployeesStorage(employees: IEmployees[]) {
+    localStorage.setItem('employeesList', JSON.stringify(employees))
   }
 
   openModal(employeeModalType: 'ADD' | 'EDIT') {
@@ -55,6 +59,13 @@ export class EmployeesListComponent {
       this.employeesList[currentEmployeeIndex] = employee
     }
     // save employeesListStorage
-    localStorage.setItem('employeesList', JSON.stringify(this.employeesList))
+    this.saveEmployeesStorage(this.employeesList)
+  }
+
+  deleteEmployee(employeeEmail: string | Event) {
+    const employeeToDeleteIndex = this.employeesList.findIndex((empl) => empl.email === employeeEmail)
+    this.employeesList = this.employeesList.filter(item => item !== this.employeesList[employeeToDeleteIndex])
+    // save employeesListStorage
+    this.saveEmployeesStorage(this.employeesList)
   }
 }
