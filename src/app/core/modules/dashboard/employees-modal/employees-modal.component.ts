@@ -4,6 +4,7 @@ import { CustomModalComponent } from '../../../../shared/components/custom-modal
 import { NgbAlertModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PositionsService } from '../../../../shared/services/positions/positions.service';
+import { IEmployees } from '../../../../shared/interfaces/employees.interface';
 
 @Component({
   selector: 'app-employees-modal',
@@ -35,7 +36,8 @@ export class EmployeesModalComponent {
   });
 
   employeePosition: string[] = []
-
+  employeeEditData!: IEmployees
+  
   constructor(private positionsService: PositionsService) {}
 
   ngOnInit() {
@@ -48,6 +50,7 @@ export class EmployeesModalComponent {
       this.employeesModalConfig.modalTitle = 'Crear nuevo empleado'
     } else {
       this.employeesModalConfig.modalTitle = 'Editar empleado'
+      this.patchFormData()
     }
     // Open employees modal
     this.modalComponent.open({size:'lg', backdrop: 'static'})
@@ -64,12 +67,23 @@ export class EmployeesModalComponent {
     this.positionsService.getPositions()
     .subscribe({
       next: (res) => {
-        console.log("🚀 ~ EmployeesModalComponent ~ getPositions ~ res:", res)
         this.employeePosition = res.positions
       },
       error: (err) => {
         console.error(err.error)
       }
+    });
+  }
+
+  // Patch employeeEditData to form
+  patchFormData() {
+    this.employeeDataForm.patchValue({
+      role: this.employeeEditData.role,
+      name: this.employeeEditData.name,
+      lastName: this.employeeEditData.lastName,
+      dateOfbirth: this.employeeEditData.dateOfbirth,
+      position: this.employeeEditData.position,
+      email: this.employeeEditData.email
     });
   }
 }

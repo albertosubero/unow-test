@@ -18,6 +18,8 @@ export class EmployeesListComponent {
   
   searchKeyword: string = ''
   employeesList: IEmployees[] = employeesListDummyData
+  employeeEditData!: IEmployees
+  employeeModalType!: 'ADD' | 'EDIT'
 
   ngOnInit() {
     this.resolveEmployeesStorage()
@@ -37,13 +39,22 @@ export class EmployeesListComponent {
   }
 
   openModal(employeeModalType: 'ADD' | 'EDIT') {
+    this.employeeModalType = employeeModalType
     // Open employees modal
-    this.employeesModalComponent.openModal(employeeModalType)
+    if (employeeModalType === 'EDIT') {
+      this.employeesModalComponent.employeeEditData = this.employeeEditData
+    }
+    this.employeesModalComponent.openModal(this.employeeModalType)
   }
 
   employeeDataSubmit(employee: IEmployees) {
-    console.log("🚀 ~ EmployeesListComponent ~ employeeDataSubmit ~ employee:", employee)
-    this.employeesList.push(employee)
+    if (this.employeeModalType === 'ADD') {
+      this.employeesList.push(employee)
+    } else {
+      const currentEmployeeIndex = this.employeesList.findIndex((empl) => empl.email === employee.email)
+      this.employeesList[currentEmployeeIndex] = employee
+    }
+    // save employeesListStorage
     localStorage.setItem('employeesList', JSON.stringify(this.employeesList))
   }
 }
