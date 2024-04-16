@@ -1,39 +1,77 @@
 <!-- edit or add employees modal -->
 <app-custom-modal [config]="employeesModalConfig" #modalComponent>
   <ng-template>
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <label class="form-label">Nombres</label>  
-          <input class="form-control" type="text" placeholder="">
+    <form [formGroup]="employeeDataForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="mb-3">
+            <label class="form-label">Nombres</label>  
+            <input 
+              formControlName="name" 
+              class="form-control" 
+              type="text" 
+              placeholder="Nombre(s) del empleado"
+            >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Puesto de trabajo</label>  
+            <select formControlName="position" class="form-select">
+              <option selected value="0">Seleccionar</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Email</label>  
+            <input 
+              formControlName="email" 
+              class="form-control" 
+              type="email" 
+              placeholder="Email del empleado"
+            >
+          </div>
         </div>
-        <div class="mb-3">
-          <label class="form-label">Puesto de trabajo</label>  
-          <select class="form-select">
-            <option selected value="0">Seleccionar</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-12 col-md-6"> 
-        <div class="mb-3">
-          <label class="form-label">Apellidos</label>  
-          <input class="form-control" type="text" placeholder="">
-        </div>
-        <div class="mb-3">
-          <label class="form-label">Fecha de nacimiento</label>  
-          <div class="input-group">
-            <input
-              class="form-control"
-              placeholder="yyyy-mm-dd"
-              name="dp"
-              ngbDatepicker
-              #d="ngbDatepicker"
-              (click)="d.toggle()"
-            />
+        <div class="col-12 col-md-6"> 
+          <div class="mb-3">
+            <label class="form-label">Apellidos</label>  
+            <input 
+              formControlName="lastName" 
+              class="form-control" 
+              type="text" 
+              placeholder="Apellido(s) del empleado"
+            >
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Fecha de nacimiento</label>  
+            <div class="input-group">
+              <input
+                formControlName="dateOfbirth"
+                class="form-control"
+                placeholder="yyyy-mm-dd"
+                name="dp"
+                ngbDatepicker
+                #d="ngbDatepicker"
+                (click)="d.toggle()"
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <!-- action footer buttons for this modal -->
+      <div class="modal-footer">
+        <button 
+          type="button" 
+          class="btn btn-outline-primary"
+        >
+          Cancelar
+        </button>
+        <button 
+          type="button" 
+          class="btn btn-primary"
+        >
+          Guardar
+        </button>
+      </div>
+      <!-- action footer buttons for this modal end's -->
+    </form>
   </ng-template> 
 </app-custom-modal> 
 <!-- edit or add employees modal end's -->
