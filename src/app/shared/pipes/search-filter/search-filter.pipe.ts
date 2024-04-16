@@ -22,9 +22,10 @@ export class SearchFilterPipe implements PipeTransform {
     searchText = searchText.toLocaleLowerCase();
 
     return items.filter(it => {
-      return Object.keys(it).some(function(key) {
-        return it[key].toLocaleLowerCase().includes(searchText.toLocaleLowerCase());
-      })
+      return it['name'].toLocaleLowerCase().includes(searchText.toLocaleLowerCase());
+      // return Object.keys(it).some(function(key) {
+      //   return it[key].toLocaleLowerCase().includes(searchText.toLocaleLowerCase());
+      // })
     });
   }
 }

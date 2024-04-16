@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { IEmployees } from '../../../../shared/interfaces/employees.interface';
-import { SearchFilterPipe } from '../../../../shared/pipes/search-filter.pipe';
+import { SearchFilterPipe } from '../../../../shared/pipes/search-filter/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
 import { employeesListDummyData } from '../../../../shared/dummyData/employees';
 import { EmployeesModalComponent } from '../employees-modal/employees-modal.component';
+import { DateFormatPipe } from '../../../../shared/pipes/date-format/date-format.pipe';
 
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent],
+  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent, DateFormatPipe],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss'
 })

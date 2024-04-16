@@ -30,7 +30,7 @@ export class EmployeesModalComponent {
     name: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
     dateOfbirth: new FormControl({}, Validators.required),
-    position: new FormControl(0, Validators.required),
+    position: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 

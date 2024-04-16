@@ -40,7 +40,7 @@
         @for (employee of employeesList | searchFilter: searchKeyword; track $index) {
           <tr>
             <td>{{ employee.name + ' ' + employee.lastName }}</td>
-            <td>{{ employee.dateOfbirth }}</td>
+            <td>{{ employee.dateOfbirth | dateFormat }}</td>
             <td>{{ employee.position }}</td>
             <td>{{ employee.email }}</td>
           </tr>

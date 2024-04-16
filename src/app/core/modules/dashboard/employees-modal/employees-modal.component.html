@@ -16,8 +16,9 @@
           <div class="mb-3">
             <label class="form-label">Puesto de trabajo*</label>  
             <select formControlName="position" class="form-select">
+              <option selected value="">Seleccionar</option>
               @for (position of employeePosition; track $index) {
-                <option selected [value]="$index">{{ position }}</option>
+                <option [value]="position">{{ position }}</option>
               }
             </select>
           </div>

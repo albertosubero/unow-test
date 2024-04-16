@@ -11,7 +11,7 @@ export const employeesListDummyData: IEmployees[] = [
       month: 4,
       year: 1991
     },
-    position: 0,
+    position: 'scrum master',
   },
   {
     email: 'pedro-c@a.com',
@@ -23,7 +23,7 @@ export const employeesListDummyData: IEmployees[] = [
       month: 3,
       year: 1987
     },
-    position: 4,
+    position: 'front-end developer',
   },
   {
     email: 'maria-c@a.com',
@@ -35,6 +35,6 @@ export const employeesListDummyData: IEmployees[] = [
       month: 12,
       year: 1995
     },
-    position: 2,
+    position: 'help desk',
   }
 ]
