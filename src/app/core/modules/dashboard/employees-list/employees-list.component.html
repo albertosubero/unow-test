@@ -28,45 +28,56 @@
     </div>
     <!-- search employees by keyword input end's -->
     <!-- employees list table -->
-    <table class="table table-striped table-responsive">
-      <thead>
-        <tr>
-          <th scope="col">Nombre</th>
-          <th scope="col">Fecha de nacimiento</th>
-          <th scope="col">Puesto de trabajo</th>
-          <th scope="col">Email</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (employee of employeesList | searchFilter: searchKeyword; track $index) {
+    @if (employeesList.length > 0) {
+      <table class="table table-striped table-responsive">
+        <thead>
           <tr>
-            <td>{{ employee.name + ' ' + employee.lastName }}</td>
-            <td>{{ employee.dateOfbirth | dateFormat }}</td>
-            <td>{{ employee.position }}</td>
-            <td>{{ employee.email }}</td>
-            <td>
-              <button 
-                class="btn btn-outline-primary mx-3"         
-                (click)="employeeEditData = employee; openModal('EDIT')"
-              >
-                <i class="las la-pen"></i>
-              </button>
-              <button 
-                appAccessControl
-                displayMode="inline-block"
-                [email]="employee.email"
-                class="btn btn-danger"
-                (click)="deleteEmployee(employee.email)"
-              >
-                <i class="las la-trash-alt"></i>
-              </button>
-            </td>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Puesto de trabajo</th>
+            <th scope="col">Email</th>
+            <th></th>
           </tr>
-        }
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          @for (employee of employeesList | searchFilter: searchKeyword; track $index) {
+            <tr>
+              <td>{{ employee.name + ' ' + employee.lastName }}</td>
+              <td>{{ employee.dateOfbirth | dateFormat }}</td>
+              <td>{{ employee.position }}</td>
+              <td>{{ employee.email }}</td>
+              <td>
+                <button 
+                  class="btn btn-outline-primary mx-3"         
+                  (click)="employeeEditData = employee; openModal('EDIT')"
+                >
+                  <i class="las la-pen"></i>
+                </button>
+                <button 
+                  appAccessControl
+                  displayMode="inline-block"
+                  [email]="employee.email"
+                  class="btn btn-danger"
+                  (click)="deleteEmployee(employee.email)"
+                >
+                  <i class="las la-trash-alt"></i>
+                </button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
     <!-- employees list table end's -->
+    <!-- empty employeesList alert -->
+    @if (employeesList.length == 0) {
+      <div class="alert alert-info d-flex align-items-center" role="alert">
+        <div class="text-center w-100">
+          <h3>No hay empleados disponibles...</h3>
+        </div>
+      </div>
+    }
+    <!-- empty employeesList alert end's -->
   </div>
 </section>
 <!-- edit or add employees modal -->
