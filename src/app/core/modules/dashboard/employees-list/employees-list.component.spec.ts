@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmployeesListComponent } from './employees-list.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
 
 describe('EmployeesListComponent', () => {
   let component: EmployeesListComponent;
@@ -16,10 +17,51 @@ describe('EmployeesListComponent', () => {
     
     fixture = TestBed.createComponent(EmployeesListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    fixture.detectChanges()
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeTruthy()
+  });
+
+  it('Mostrar tabla de listado de empleados', () => {
+    const employeesTable = fixture.debugElement.query(By.css('table.table'))
+    expect(employeesTable).toBeTruthy() //TODO: ✔
+  });
+
+  it('Abrir modal de creacion de empleados', () => {
+    // open modal by button click
+    const btnElement = fixture.debugElement.nativeElement.querySelector('#openCreateModal')
+    btnElement.click()
+    // check if modal is open
+    let employeesModal = document.getElementsByClassName('modal-dialog')
+
+    expect(employeesModal).toBeTruthy() //TODO: ✔
+  });
+
+  it('Abrir modal de edicion de empleado', () => {
+    // open modal by button click
+    const btnElement = fixture.debugElement.query(By.css('button.btn-outline-primary'))
+    btnElement.nativeElement.click()
+    // check if modal is open
+    let employeesModal = document.getElementsByClassName('modal-dialog')
+
+    expect(employeesModal).toBeTruthy() //TODO: ✔
+  });
+
+  it('Eliminar empleado', () => {
+    // current employees length
+    const employeesLength = component.employeesList.length
+    // delete employee by button
+    const btnElement = fixture.debugElement.query(By.css('button.btn-danger'))
+    btnElement.nativeElement.click()
+
+    expect(component.employeesList.length).toEqual(employeesLength - 1) //TODO: ✔
+  });
+
+  it('Mostrar alerta de listado de empleados vacio', () => {
+    component.employeesList = []
+    const employeesAlert = fixture.debugElement.query(By.css('div.alert'))
+    expect(employeesAlert).toBeTruthy() //TODO: ✔
   });
 });

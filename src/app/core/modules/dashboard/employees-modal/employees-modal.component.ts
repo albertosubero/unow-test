@@ -69,8 +69,10 @@ export class EmployeesModalComponent {
   // Form submit
   onSubmit() {
     const employee = this.employeeDataForm.value
-    this.employeeDataSubmit.emit(employee)
-    this.closeModal()
+    if (this.employeeDataForm.valid) {
+      this.employeeDataSubmit.emit(employee)
+      this.closeModal()
+    }
   }
 
   // Remove employee from company
