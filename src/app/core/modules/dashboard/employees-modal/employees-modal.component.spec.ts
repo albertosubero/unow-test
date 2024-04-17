@@ -22,4 +22,26 @@ describe('EmployeesModalComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Modal en modo crear empleado', () => {
+    component.openModal('ADD')
+    expect(component.employeesModalConfig.modalTitle).toEqual('Crear nuevo empleado') //TODO: ✔
+  });
+
+  it('Modal en modo editar empleado', () => {
+    component.employeeEditData =   {
+      email: 'alberto-c@a.com',
+      role: 'ADMIN',
+      name: 'Alberto',
+      lastName: 'Subero',
+      dateOfbirth: {
+        day: 22,
+        month: 4,
+        year: 1991
+      },
+      position: 'scrum master',
+    }
+    component.openModal('EDIT')
+    expect(component.employeesModalConfig.modalTitle).toEqual('Editar empleado') //TODO: ✔
+  });
 });
