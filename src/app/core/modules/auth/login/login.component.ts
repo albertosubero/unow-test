@@ -13,16 +13,17 @@ import { IEmployees } from '../../../../shared/interfaces/employees.interface';
 })
 export class LoginComponent {
   loginForm = new FormGroup({
-    email: new FormControl('', Validators.required)
+    email: new FormControl('', [Validators.required, Validators.email])
   });
-
+  employee!: IEmployees
   constructor(private router: Router) {}
 
   login() {
     if (this.loginForm.valid) {
       const employee = this.emailValidation(this.loginForm.value.email!)
+      this.employee = employee[0]
       if (employee.length) {
-        this.saveLoggedUserData(employee[0])
+        this.saveLoggedUserData(this.employee)
         this.router.navigateByUrl('/employees');
       }
     }
