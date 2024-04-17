@@ -53,6 +53,9 @@
                 <i class="las la-pen"></i>
               </button>
               <button 
+                appAccessControl
+                displayMode="inline-block"
+                [email]="employee.email"
                 class="btn btn-danger"
                 (click)="deleteEmployee(employee.email)"
               >

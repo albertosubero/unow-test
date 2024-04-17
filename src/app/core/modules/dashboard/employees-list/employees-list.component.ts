@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { employeesListDummyData } from '../../../../shared/dummyData/employees';
 import { EmployeesModalComponent } from '../employees-modal/employees-modal.component';
 import { DateFormatPipe } from '../../../../shared/pipes/date-format/date-format.pipe';
+import { AccessControlDirective } from '../../../../shared/directives/access-control.directive';
 
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent, DateFormatPipe],
+  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent, DateFormatPipe, AccessControlDirective],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss'
 })

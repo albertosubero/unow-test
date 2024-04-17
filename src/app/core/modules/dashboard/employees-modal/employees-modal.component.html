@@ -56,16 +56,20 @@
               />
             </div>
           </div>
-          <div class="mb-3">
-            <button 
-              class="btn btn-danger w-100" 
-              style="margin-top: 32px;"
-              (click)="deleteEmployee()"
-            >
-              Abandonar la compañía
-              <i class="las la-sign-out-alt"></i>
-            </button>
-          </div>
+          @if (employeeModalType === 'EDIT') {
+            <div class="mb-3">
+              <button 
+                appAccessControl
+                displayMode="inline-block"
+                [email]="employeeDataForm.value.email!"
+                class="btn btn-danger w-100" 
+                (click)="deleteEmployee()"
+              >
+                Eliminar la compañía
+                <i class="las la-sign-out-alt"></i>
+              </button>
+            </div>
+          }
         </div>
       </div>
       <!-- action footer buttons for this modal -->

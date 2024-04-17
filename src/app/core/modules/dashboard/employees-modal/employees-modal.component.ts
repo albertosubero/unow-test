@@ -5,11 +5,12 @@ import { NgbAlertModule, NgbDatepickerModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { PositionsService } from '../../../../shared/services/positions/positions.service';
 import { IEmployees } from '../../../../shared/interfaces/employees.interface';
+import { AccessControlDirective } from '../../../../shared/directives/access-control.directive';
 
 @Component({
   selector: 'app-employees-modal',
   standalone: true,
-  imports: [CustomModalComponent, FormsModule, ReactiveFormsModule, NgbDatepickerModule, NgbAlertModule],
+  imports: [CustomModalComponent, FormsModule, ReactiveFormsModule, NgbDatepickerModule, NgbAlertModule, AccessControlDirective],
   providers: [PositionsService],
   templateUrl: './employees-modal.component.html',
   styleUrl: './employees-modal.component.scss'
@@ -38,7 +39,8 @@ export class EmployeesModalComponent {
 
   employeePosition: string[] = []
   employeeEditData!: IEmployees
-  
+  employeeModalType!: 'ADD' | 'EDIT'
+
   constructor(private positionsService: PositionsService) {}
 
   ngOnInit() {
@@ -49,6 +51,7 @@ export class EmployeesModalComponent {
   // open CustomModalComponent
   openModal(employeeModalType: 'ADD' | 'EDIT') {
     // Setup modalTitle by employeeModalType
+    this.employeeModalType = employeeModalType
     if (employeeModalType === 'ADD') {
       this.employeesModalConfig.modalTitle = 'Crear nuevo empleado'
       this.employeeDataForm.reset()
