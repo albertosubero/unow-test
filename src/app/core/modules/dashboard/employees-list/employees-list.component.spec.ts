@@ -61,6 +61,7 @@ describe('EmployeesListComponent', () => {
 
   it('Mostrar alerta de listado de empleados vacio', () => {
     component.employeesList = []
+    fixture.detectChanges()
     const employeesAlert = fixture.debugElement.query(By.css('div.alert'))
     expect(employeesAlert).toBeTruthy() //TODO: ✔
   });
