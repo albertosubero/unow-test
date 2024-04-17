@@ -1,0 +1,23 @@
+<div class="section">
+  <div class="container">
+    <div 
+      class="d-flex justify-content-center align-items-center" 
+      style="height: calc(100vh - 8rem);"
+    >
+      <div class="login-form">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <p class="login-text fs-5 mb-4 text-center">Iniciar sesión, para acceder al sistema</p>
+          <!-- email input -->
+          <div class="mb-3 position-relative">
+            <label for="emailInput" class="form-label">Email</label>
+            <input type="email" class="form-control" id="emailInput" formControlName="email" placeholder="Introducir Email">
+          </div>
+          <!-- email input end's -->
+          <button type="submit" class="btn btn-primary d-block" [disabled]="loginForm.invalid">
+            Iniciar sesión
+          </button>        
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
