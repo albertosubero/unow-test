@@ -11,16 +11,31 @@
               class="form-control" 
               type="text" 
               placeholder="Nombre(s) del empleado"
+              [ngClass]="{'is-invalid': employeeDataFormSubmited && employeeDataForm.controls['name'].errors}"
             >
+            @if (employeeDataForm.controls['name'].hasError('required') && employeeDataFormSubmited) {
+              <div class="error-text">
+                Nombre del empleado es requerido*
+              </div>
+            }
           </div>
           <div class="mb-3">
             <label class="form-label">Puesto de trabajo*</label>  
-            <select formControlName="position" class="form-select">
-              <option selected value="">Seleccionar</option>
+            <select 
+              formControlName="position" 
+              class="form-select"
+              [ngClass]="{'is-invalid': employeeDataFormSubmited && employeeDataForm.controls['position'].errors}"
+            >
+              <option selected value="null">Seleccionar</option>
               @for (position of employeePosition; track $index) {
                 <option [value]="position">{{ position }}</option>
               }
             </select>
+            @if (employeeDataForm.controls['position'].hasError('required') && employeeDataFormSubmited) {
+              <div class="error-text">
+                Debe seleccionar un puesto de trabajo*
+              </div>
+            }
           </div>
           <div class="mb-3">
             <label class="form-label">Email*</label>  
@@ -29,7 +44,18 @@
               class="form-control" 
               type="email" 
               placeholder="Email del empleado"
+              [ngClass]="{'is-invalid': employeeDataFormSubmited && employeeDataForm.controls['email'].errors}"
             >
+            @if (employeeDataForm.controls['email'].hasError('required') && employeeDataFormSubmited) {
+              <div class="error-text">
+                Email es requerido*
+              </div>
+            }
+            @if (employeeDataForm.controls['email'].hasError('email') && employeeDataFormSubmited) {
+              <div class="error-text">
+                Formato de email invalido*
+              </div>
+            }
           </div>
         </div>
         <div class="col-12 col-md-6"> 
@@ -40,7 +66,13 @@
               class="form-control" 
               type="text" 
               placeholder="Apellido(s) del empleado"
+              [ngClass]="{'is-invalid': employeeDataFormSubmited && employeeDataForm.controls['lastName'].errors}"
             >
+            @if (employeeDataForm.controls['lastName'].hasError('required') && employeeDataFormSubmited) {
+              <div class="error-text">
+                Apellido del empleado requerido*
+              </div>
+            }
           </div>
           <div class="mb-3">
             <label class="form-label">Fecha de nacimiento*</label>  
@@ -53,8 +85,14 @@
                 ngbDatepicker
                 #d="ngbDatepicker"
                 (click)="d.toggle()"
+                [ngClass]="{'is-invalid': employeeDataFormSubmited && employeeDataForm.controls['dateOfbirth'].errors}"
               />
             </div>
+            @if (employeeDataForm.controls['dateOfbirth'].hasError('required') && employeeDataFormSubmited) {
+              <div class="error-text">
+                Fecha de nacimiento del empleado requerida*
+              </div>
+            }
           </div>
           @if (employeeModalType === 'EDIT') {
             <div class="mb-3">

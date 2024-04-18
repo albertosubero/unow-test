@@ -30,7 +30,7 @@ export class LoginComponent {
       // check if email is registered
       const employee = this.emailValidation(this.loginForm.value.email!)
       this.employee = employee[0]
-      // if email is registered go to employees view
+      // if email is registered save user data in local storage go to employees view
       if (employee.length) {
         this.saveLoggedUserData(this.employee)
         this.router.navigateByUrl('/employees');
@@ -47,7 +47,7 @@ export class LoginComponent {
       return it['email'].toLocaleLowerCase().includes(email.toLocaleLowerCase());
     });
   }
-
+  // save logged user info in local storage
   saveLoggedUserData(employee: IEmployees) {
     localStorage.setItem('userRole', employee.role)
     localStorage.setItem('userEmail', employee.email)

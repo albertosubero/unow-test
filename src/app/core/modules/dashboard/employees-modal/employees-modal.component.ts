@@ -6,11 +6,12 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { PositionsService } from '../../../../shared/services/positions/positions.service';
 import { IEmployees } from '../../../../shared/interfaces/employees.interface';
 import { AccessControlDirective } from '../../../../shared/directives/access-control.directive';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-employees-modal',
   standalone: true,
-  imports: [CustomModalComponent, FormsModule, ReactiveFormsModule, NgbDatepickerModule, NgbAlertModule, AccessControlDirective],
+  imports: [CustomModalComponent, FormsModule, ReactiveFormsModule, NgbDatepickerModule, NgbAlertModule, AccessControlDirective, CommonModule],
   providers: [PositionsService],
   templateUrl: './employees-modal.component.html',
   styleUrl: './employees-modal.component.scss'
@@ -37,6 +38,9 @@ export class EmployeesModalComponent {
     email: new FormControl('', [Validators.required, Validators.email]),
   });
 
+  employeeDataFormError: boolean = false
+  employeeDataFormSubmited: boolean = false
+
   employeePosition: string[] = []
   employeeEditData!: IEmployees
   employeeModalType!: 'ADD' | 'EDIT'
@@ -50,8 +54,10 @@ export class EmployeesModalComponent {
 
   // open CustomModalComponent
   openModal(employeeModalType: 'ADD' | 'EDIT') {
+    this.employeeDataFormSubmited = false
     // Setup modalTitle by employeeModalType
     this.employeeModalType = employeeModalType
+    
     if (employeeModalType === 'ADD') {
       this.employeesModalConfig.modalTitle = 'Crear nuevo empleado'
       this.employeeDataForm.reset()
@@ -69,10 +75,14 @@ export class EmployeesModalComponent {
   // Form submit
   onSubmit() {
     const employee = this.employeeDataForm.value
+    this.employeeDataFormSubmited = false
+
     if (this.employeeDataForm.valid) {
       this.employeeDataSubmit.emit(employee)
       this.closeModal()
     }
+
+    this.employeeDataFormSubmited = true
   }
 
   // Remove employee from company
