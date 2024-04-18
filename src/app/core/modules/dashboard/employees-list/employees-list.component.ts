@@ -32,7 +32,7 @@ export class EmployeesListComponent {
     // get storaged employeesList
     const employeesListStorage = JSON.parse(localStorage.getItem('employeesList')!)
     // resolve employeesListStorage
-    if (employeesListStorage.length === 0 || !employeesListStorage) {
+    if (employeesListStorage?.length === 0 || !employeesListStorage) {
       // save dummyData in localStorage
       this.saveEmployeesStorage(this.employeesList)
     } else {
