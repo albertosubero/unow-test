@@ -44,6 +44,7 @@
               class="form-control" 
               type="email" 
               placeholder="Email del empleado"
+              [disabled]="employeeModalType === 'EDIT'"
               [ngClass]="{'is-invalid': employeeDataFormSubmited && employeeDataForm.controls['email'].errors}"
             >
             @if (employeeDataForm.controls['email'].hasError('required') && employeeDataFormSubmited) {

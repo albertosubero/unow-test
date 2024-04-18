@@ -3,6 +3,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { EmployeesListComponent } from './employees-list.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
+import { employeesListDummyData } from '../../../../shared/dummyData/employees';
 
 describe('EmployeesListComponent', () => {
   let component: EmployeesListComponent;
@@ -87,5 +88,24 @@ describe('EmployeesListComponent', () => {
     component.employeeDataSubmit(newEmployee)
 
     expect(component.employeesList.length).toEqual(employeesLength + 1) //TODO: ✔
+  });
+
+  it('Editar empleado existente', () => {
+    // current employee to edit
+    const currentEmployee = component.employeesList[0]
+
+    const editedEmployee = {
+      email: currentEmployee.email,
+      role: currentEmployee.role,
+      name: 'Fernando',
+      lastName: currentEmployee.lastName,
+      dateOfbirth: currentEmployee.dateOfbirth,
+      position: currentEmployee.position,
+    }
+    component.employeeModalType = 'EDIT'
+
+    component.employeeDataSubmit(editedEmployee)
+
+    expect(component.employeesList[0].name === 'Fernando').toBeTrue() //TODO: ✔
   });
 });
