@@ -65,4 +65,27 @@ describe('EmployeesListComponent', () => {
     const employeesAlert = fixture.debugElement.query(By.css('div.alert'))
     expect(employeesAlert).toBeTruthy() //TODO: ✔
   });
+
+  it('Crear nuevo empleado', () => {
+    // current employees length
+    const employeesLength = component.employeesList.length
+    const role: 'ADMIN' | 'USER' = 'ADMIN'
+    const newEmployee = {
+      email: 'fernando-c@a.com',
+      role: role,
+      name: 'Fernando',
+      lastName: 'Ramirez',
+      dateOfbirth: {
+        day: 25,
+        month: 5,
+        year: 1995
+      },
+      position: 'scrum master',
+    }
+    component.employeeModalType = 'ADD'
+
+    component.employeeDataSubmit(newEmployee)
+
+    expect(component.employeesList.length).toEqual(employeesLength + 1) //TODO: ✔
+  });
 });
