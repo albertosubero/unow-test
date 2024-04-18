@@ -34,9 +34,9 @@
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col" class="d-none d-lg-table-cell">Fecha de nacimiento</th>
             <th scope="col">Puesto de trabajo</th>
-            <th scope="col">Email</th>
+            <th scope="col" class="d-none d-md-table-cell">Email</th>
             <th></th>
           </tr>
         </thead>
@@ -44,12 +44,13 @@
           @for (employee of employeesList | searchFilter: searchKeyword; track $index) {
             <tr>
               <td>{{ employee.name + ' ' + employee.lastName }}</td>
-              <td>{{ employee.dateOfbirth | dateFormat }}</td>
+              <td class="d-none d-lg-table-cell">{{ employee.dateOfbirth | dateFormat }}</td>
               <td>{{ employee.position }}</td>
-              <td>{{ employee.email }}</td>
-              <td>
+              <td class="d-none d-md-table-cell">{{ employee.email }}</td>
+              <td class="text-end" style="width: 112px;">
                 <button 
-                  class="btn btn-outline-primary mx-3"         
+                  class="btn btn-outline-primary"    
+                  style="margin-right: 10px;"     
                   (click)="employeeEditData = employee; openModal('EDIT')"
                 >
                   <i class="las la-pen"></i>
@@ -59,7 +60,7 @@
                   displayMode="inline-block"
                   [email]="employee.email"
                   class="btn btn-danger"
-                  (click)="deleteEmployee(employee.email)"
+                  (click)="openConfirmModal(employee)"
                 >
                   <i class="las la-trash-alt"></i>
                 </button>
@@ -85,6 +86,12 @@
 <app-employees-modal 
   #employeesModalComponent 
   (employeeDataSubmit)="employeeDataSubmit($event)" 
-  (removeEmployee)="deleteEmployee($event)" 
+  (removeEmployee)="openConfirmModal($event)" 
 />
 <!-- edit or add employees modal end's -->
+<!-- delete employee confirm modal -->
+<app-confirm-delete-employee-modal 
+  #confirmDeleteEmployeeModalComponent 
+  (removeEmployee)="deleteEmployee($event)" 
+/>
+<!-- delete employee confirm modal end's -->

@@ -61,9 +61,11 @@ export class EmployeesModalComponent {
     if (employeeModalType === 'ADD') {
       this.employeesModalConfig.modalTitle = 'Crear nuevo empleado'
       this.employeeDataForm.reset()
+      this.employeeDataForm.controls['email'].enable();
     } else {
       this.employeesModalConfig.modalTitle = 'Editar empleado'
       this.patchFormData()
+      this.employeeDataForm.controls['email'].disable();
     }
     // Open employees modal
     this.modalComponent.open({size:'lg', backdrop: 'static'})
@@ -87,7 +89,7 @@ export class EmployeesModalComponent {
 
   // Remove employee from company
   deleteEmployee() {
-    this.removeEmployee.emit(this.employeeDataForm.value.email)
+    this.removeEmployee.emit(this.employeeEditData)
     this.closeModal()
   }
 

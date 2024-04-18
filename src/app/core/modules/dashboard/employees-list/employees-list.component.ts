@@ -6,17 +6,19 @@ import { employeesListDummyData } from '../../../../shared/dummyData/employees';
 import { EmployeesModalComponent } from '../employees-modal/employees-modal.component';
 import { DateFormatPipe } from '../../../../shared/pipes/date-format/date-format.pipe';
 import { AccessControlDirective } from '../../../../shared/directives/access-control.directive';
+import { ConfirmDeleteEmployeeModalComponent } from '../../../../shared/components/confirm-delete-employee-modal/confirm-delete-employee-modal.component';
 
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent, DateFormatPipe, AccessControlDirective],
+  imports: [FormsModule, SearchFilterPipe, EmployeesModalComponent, DateFormatPipe, AccessControlDirective, ConfirmDeleteEmployeeModalComponent],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss'
 })
 export class EmployeesListComponent {
   @ViewChild('employeesModalComponent', { static: false }) employeesModalComponent!: EmployeesModalComponent;
-  
+  @ViewChild('confirmDeleteEmployeeModalComponent', { static: false }) confirmDeleteEmployeeModalComponent!: ConfirmDeleteEmployeeModalComponent;
+
   searchKeyword: string = ''
   employeesList: IEmployees[] = employeesListDummyData
   employeeEditData!: IEmployees
@@ -50,6 +52,11 @@ export class EmployeesListComponent {
       this.employeesModalComponent.employeeEditData = this.employeeEditData
     }
     this.employeesModalComponent.openModal(this.employeeModalType)
+  }
+
+  openConfirmModal(employee: IEmployees) {
+    this.confirmDeleteEmployeeModalComponent.employee = employee
+    this.confirmDeleteEmployeeModalComponent.openModal()
   }
 
   employeeDataSubmit(employee: IEmployees) {
