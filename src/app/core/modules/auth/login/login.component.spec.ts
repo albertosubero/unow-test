@@ -45,6 +45,44 @@ describe('LoginComponent', () => {
     expect(employee.length).toEqual(0); //TODO: ✔
   });
 
+  
+  it('Mostrar alerta para email no registrado', () => {
+    let email = component.loginForm.controls['email']
+    email.setValue('aa33@gmail.com')
+    // Submit by button click
+    const btnElement = fixture.debugElement.query(By.css('button.btn'))
+    btnElement.nativeElement.click()
+    fixture.detectChanges()
+    // get error message
+    const alertElement = fixture.debugElement.nativeElement.querySelector('#loginFormError')
+
+    expect(alertElement && component.loginFormError).toBeTrue(); //TODO: ✔
+  });
+
+  it('Mostrar alerta para email con error de formato', () => {
+    let email = component.loginForm.controls['email']
+    email.setValue('aa33')
+    // Submit by button click
+    const btnElement = fixture.debugElement.query(By.css('button.btn'))
+    btnElement.nativeElement.click()
+    fixture.detectChanges()
+    // get error message
+    const alertElement = fixture.debugElement.nativeElement.querySelector('#emailFormatInvalid')
+
+    expect(alertElement && component.loginFormSubmited).toBeTrue(); //TODO: ✔
+  });
+
+  it('Mostrar alerta para email requerido', () => {
+    // Submit by button click
+    const btnElement = fixture.debugElement.query(By.css('button.btn'))
+    btnElement.nativeElement.click()
+    fixture.detectChanges()
+    // get error message
+    const alertElement = fixture.debugElement.nativeElement.querySelector('#emailIsRequired')
+
+    expect(alertElement && component.loginFormSubmited).toBeTrue(); //TODO: ✔
+  });
+
   it('Formulario valido con Login exitoso', () => {
     let email = component.loginForm.controls['email']
     email.setValue('alberto-c@a.com')

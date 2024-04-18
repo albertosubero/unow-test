@@ -23,24 +23,29 @@
           <!-- email input end's -->
           <!-- feedback errors -->
           @if (loginForm.controls['email'].hasError('required') && loginFormSubmited) {
-            <div class="error-text mb-3">
+            <div id="emailIsRequired" class="error-text mb-3">
               Email es requerido*
             </div>
           }
           @if (loginForm.controls['email'].hasError('email') && loginFormSubmited) {
-            <div class="error-text mb-3">
+            <div id="emailFormatInvalid" class="error-text mb-3">
               Formato de email invalido*
             </div>
           }
           @if (loginFormError) {
-            <div class="error-text mb-3">
+            <div id="loginFormError" class="error-text mb-3">
               El correo no se encuentra registrado*
             </div>
           }
           <!-- feedback errors end's -->
-          <button type="submit" class="btn btn-primary d-block">
+          <button type="submit" class="btn btn-primary d-block mb-3">
             Iniciar sesión
-          </button>        
+          </button>      
+          <div class="alert alert-info">
+            {{ 'Admin login: alberto-c@a.com' }}
+            <br>
+            {{ 'User login: pedro-c@a.com' }}
+          </div>  
         </form>
       </div>
     </div>
