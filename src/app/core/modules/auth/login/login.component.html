@@ -10,9 +10,34 @@
           <!-- email input -->
           <div class="mb-3 position-relative">
             <label for="emailInput" class="form-label">Email</label>
-            <input type="email" class="form-control" id="emailInput" formControlName="email" placeholder="Introducir Email">
+            <input 
+              type="email" 
+              class="form-control" 
+              id="emailInput" 
+              formControlName="email" 
+              placeholder="Introducir Email"
+              [ngClass]="{'is-invalid': loginFormSubmited && loginForm.controls['email'].errors}"
+              (click)="loginFormError = false"
+            >
           </div>
           <!-- email input end's -->
+          <!-- feedback errors -->
+          @if (loginForm.controls['email'].hasError('required') && loginFormSubmited) {
+            <div class="error-text mb-3">
+              Email es requerido*
+            </div>
+          }
+          @if (loginForm.controls['email'].hasError('email') && loginFormSubmited) {
+            <div class="error-text mb-3">
+              Formato de email invalido*
+            </div>
+          }
+          @if (loginFormError) {
+            <div class="error-text mb-3">
+              El correo no se encuentra registrado*
+            </div>
+          }
+          <!-- feedback errors end's -->
           <button type="submit" class="btn btn-primary d-block">
             Iniciar sesión
           </button>        
