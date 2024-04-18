@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmployeesModalComponent } from './employees-modal.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
 
 describe('EmployeesModalComponent', () => {
   let component: EmployeesModalComponent;
@@ -43,5 +44,41 @@ describe('EmployeesModalComponent', () => {
     }
     component.openModal('EDIT')
     expect(component.employeesModalConfig.modalTitle).toEqual('Editar empleado') //TODO: ✔
+  });
+
+  it('Formulario invalido', () => {
+    component.employeeDataForm.patchValue({
+      role: null,
+      name: null,
+      lastName: null,
+      dateOfbirth: null,
+      position: null,
+      email: null
+    });
+    // Submit
+    component.onSubmit()
+
+    expect(component.employeeDataForm.invalid).toBeTrue(); //TODO: ✔
+  });
+
+  it('Formulario valido y empleado creado', () => {
+    // fill employeeDataform
+    component.employeeDataForm.patchValue({
+      email: 'fernando-c@a.com',
+      role: 'ADMIN',
+      name: 'Fernando',
+      lastName: 'Perez',
+      dateOfbirth: {
+        day: 25,
+        month: 6,
+        year: 1995
+      },
+      position: 'scrum master',
+    });
+    // Submit
+    component.onSubmit()
+    fixture.detectChanges()
+
+    expect(component.employeeDataForm.valid).toBeTrue(); //TODO: ✔
   });
 });
